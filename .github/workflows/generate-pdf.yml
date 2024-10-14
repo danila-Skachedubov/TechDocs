@@ -1,0 +1,30 @@
+name: Generate PDFs from Markdown
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: sudo apt-get install texlive-latex-extra pandoc
+
+    - name: Find all Markdown files and convert to PDF
+      run: |
+        for file in $(find . -name '*.md'); do
+          filename=$(basename -- "$file")
+          pandoc "$file" -o "${filename%.md}.pdf"
+        done
+
+    - name: Upload PDFs
+      uses: actions/upload-artifact@v2
+      with:
+        name: pdfs
+        path: '*.pdf'
+
