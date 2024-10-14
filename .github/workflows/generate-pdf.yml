@@ -22,8 +22,16 @@ jobs:
           pandoc "$file" --pdf-engine=xelatex -o "${filename%.md}.pdf"
         done
 
+    - name: Commit PDF files
+      run: |
+        git config --global user.name 'github-actions'
+        git config --global user.email 'github-actions@github.com'
+        git add pdf/*.pdf
+        git commit -m "Add generated PDF files"
+        git push origin main
+
     - name: Upload PDFs
       uses: actions/upload-artifact@v3
       with:
         name: pdfs
-        path: '*.pdf'
+        path: 'pdf/*.pdf'
