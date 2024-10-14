@@ -3,7 +3,7 @@ name: Generate PDFs from Markdown
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   build:
