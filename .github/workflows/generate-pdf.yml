@@ -3,7 +3,7 @@ name: Generate PDFs from Markdown
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   build:
@@ -13,13 +13,13 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Install dependencies
-      run: sudo apt-get install texlive-latex-extra pandoc
+      run: sudo apt-get install texlive-xetex pandoc
 
     - name: Find all Markdown files and convert to PDF
       run: |
         for file in $(find . -name '*.md'); do
           filename=$(basename -- "$file")
-          pandoc "$file" -o "${filename%.md}.pdf"
+          pandoc "$file" --pdf-engine=xelatex -o "${filename%.md}.pdf"
         done
 
     - name: Upload PDFs
@@ -27,4 +27,3 @@ jobs:
       with:
         name: pdfs
         path: '*.pdf'
-
