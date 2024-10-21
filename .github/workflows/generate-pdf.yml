@@ -13,22 +13,27 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Install dependencies
-      run: sudo apt-get install texlive-xetex pandoc
+      run: sudo apt-get install -y texlive-xetex pandoc fonts-liberation
 
     - name: Find all Markdown files and convert to PDF
       run: |
+        mkdir -p pdf
         for file in $(find . -name '*.md'); do
           filename=$(basename -- "$file")
-          pandoc "$file" --pdf-engine=xelatex -o "${filename%.md}.pdf"
+          pandoc "$file" --pdf-engine=xelatex \
+            -V mainfont="Liberation Serif" \
+            -o "pdf/${filename%.md}.pdf"
         done
 
-    - name: Commit PDF files
+    - name: Push changes
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         git config --global user.name 'github-actions'
         git config --global user.email 'github-actions@github.com'
         git add pdf/*.pdf
         git commit -m "Add generated PDF files"
-        git push origin main
+        git push origin master
 
     - name: Upload PDFs
       uses: actions/upload-artifact@v3
