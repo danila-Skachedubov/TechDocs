@@ -418,11 +418,7 @@ Kerberos адаптирует протокол Нидхема-Шрёдера, у
 
 Ниже показана сводная информация о последовательности сообщений для выполнения аутентификации:
 
-<div style="text-align: center;">
-  <img src="./images/kerberos/kerberos_message_summary.webp" alt="Kerberos Message Summary" width="400" height="250">
-</div>
-
-
+![Kerberos Message Summary](images/kerberos/kerberos_message_summary.webp)
 ## Описание сообщения KRB_AS_REQ
 
 
