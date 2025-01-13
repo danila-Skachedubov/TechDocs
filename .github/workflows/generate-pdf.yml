@@ -12,6 +12,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: Ensure images are available
+      run: mkdir -p images && cp -r ./images ./pdf
+
     - name: Install dependencies
       run: sudo apt-get install -y texlive-xetex pandoc fonts-liberation
 
