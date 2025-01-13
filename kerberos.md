@@ -418,7 +418,7 @@ Kerberos адаптирует протокол Нидхема-Шрёдера, у
 
 Ниже показана сводная информация о последовательности сообщений для выполнения аутентификации:
 
-![Kerberos Message Summary](images/kerberos/kerberos_message_summary.webp)
+![Kerberos Message Summary](images/kerberos/kerberos_message_summary.png)
 ## Описание сообщения KRB_AS_REQ
 
 
